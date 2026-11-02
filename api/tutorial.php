@@ -4,157 +4,292 @@
   $dotenv->safeLoad();
 ?>
 
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PHP + Vercel</title>
-  <link rel="shortcut icon" href="../public/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="../public/styles/styles.css">
-  <link rel="stylesheet" href="../public/styles/bootstrap.min.css">
-  <link rel="stylesheet" href="../public/styles/atom-one-dark.min.css">
-  <script src="../public/scripts/highlight.min.js"></script>
-  <script src="<?=$_ENV['FONT_AWESOME'];?>"></script>
-  <script src="../public/scripts/scripts.js"></script>
-  <script src="../public/scripts/bootstrap.bundle.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Alif Shidqi — Portfolio 2026</title>
+  <meta name="description" content="Graphic design portfolio: branding, illustration, packaging, photography.">
+
+  <!-- Preconnect to critical origins (Priority Hints) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Passion+One:wght@400;700&family=Fredoka:wght@300;400&family=Montserrat:ital,wght@0,400;0,700;1,300&family=Caveat:wght@600&display=swap&subset=vietnamese"
+    rel="stylesheet">
+
+  <!-- Tailwind v3 Play CDN: tokens live in :root, referenced via var() -->
+  <script src="https://cdn.tailwindcss.com/3.4.17" fetchpriority="high"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            locker:   'var(--locker)',
+            butter:   'var(--butter)',
+            charcoal: 'var(--charcoal)',
+            navy:     'var(--navy)',
+            brick:    'var(--brick)',
+            cream:    'var(--cream)'
+          },
+          fontFamily: {
+            label: 'var(--f-label)',
+            body:  'var(--f-body)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Main stylesheet (Priority Hint: high) -->
+  <link rel="stylesheet" href="../public/styles/styles.css" fetchpriority="high">
+
+  <!-- Motion stack + icons (deferred, run in order) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <!-- App entry point -->
+  <script defer src="../public/scripts/main.js"></script>
 </head>
+
 <body>
-  <main class="container-lg">
-    <div class="row">
-      <div class="col-lg-9 col-12 mx-auto">
-        <header class="text-center mt-4">
-          <h1 class="mb-4">Deploy PHP Application to Vercel</h1>  
-        </header>
-        <div>
-          <p>
-            There are several platforms that can be used to host websites created with the PHP programming language, one of them is Vercel.
-            Vercel is a cloud platform for frontend frameworks and static sites.
-            To be able to host PHP application, we will use the PHP Runtime for Vercel Serverless Function that was created by
-            <a href="https://github.com/vercel-community" class="text-white">
-              <i class="fa-brands fa-github"></i> vercel-community.
-            </a>
-          </p>
+<a class="skip" href="#work">Skip to work</a>
+
+<!-- ===================== NAV ===================== -->
+<header id="nav" class="nav">
+  <a class="logo tag tag--navy" href="#top">Alif Shidqi</a>
+  <nav aria-label="Primary">
+    <a class="tag tag--yellow" href="#work">Work</a>
+    <a class="tag tag--lime"   href="#about">About</a>
+    <a class="tag tag--red"    href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+  <!-- ===================== HERO ===================== -->
+  <section class="scene hero" aria-labelledby="hero-title">
+    <i class="bg" data-bg></i>
+    <div class="starburst" data-orn aria-hidden="true">2026</div>
+    <div class="sticky-note-hero" data-orn aria-hidden="true">
+      <i class="pin"></i>Dream bigger.<br>Bigger.<br><b>BIGGER</b>
+    </div>
+    <div class="board data-board">
+      <h1 id="hero-title" class="die" data-title data-t="Your Name's Portfolio">
+        <small>Alif Shidqi</small>PORTFOLIO
+      </h1>
+      <p class="hero-sub" data-hero-in>DevOps · backend developer · project manager</p>
+      <a class="badge badge--yellow" data-hero-in href="#work">
+        See my work <i data-lucide="arrow-right" class="icon-inline"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================== TOC / WORK ===================== -->
+  <section id="work" class="scene toc" aria-labelledby="work-title">
+    <i class="bg" data-bg></i>
+    <h2 id="work-title" class="die die--sm" data-reveal data-t="Table of Contents">Table of Contents</h2>
+    <ul class="box" data-stagger>
+      <li><a class="o obj envelope"    href="#digital-arts">Web project</a></li>
+      <li><a class="o obj note"        href="#case-study">project manager</a></li>
+      <li><a class="o obj kraft"       href="#digital-arts">DevOps</a></li>
+      <li><a class="o obj folder-blue" href="#digital-arts">IT staff</a></li>
+      <li><a class="o obj tape-lime"   href="#method">Problem solver</a></li>
+    </ul>
+  </section>
+
+  <!-- ===================== CHAPTER: Web developer & DevOps ===================== -->
+  <section id="digital-arts" class="chapter chapter--yellow torn pb-24" aria-labelledby="da-title">
+    <div class="folder-tabs" aria-hidden="true"><i></i><i></i></div>
+    <h2 id="da-title" class="tab-title" data-reveal>Web developer & DevOps</h2>
+    <div class="prints" data-stagger>
+      <figure class="o print r-l"><i class="pin"></i><div class="art a1"></div><figcaption>Web Profile Company PT Fasya</figcaption></figure>
+      <figure class="o print r-m"><i class="pin"></i><div class="art a2"></div><figcaption>Web Profile Company Indomontir</figcaption></figure>
+      <figure class="o print r-r"><i class="pin"></i><div class="art a3"></div><figcaption>Bengkel TI</figcaption></figure>
+    </div>
+    <p class="cap" data-reveal>A few Coding Project I love & client request</p>
+  </section>
+
+  <!-- ============ CHAPTER: CASE STUDY (merged from performance-graph.html) ============ -->
+  <section id="case-study" class="scene case-study torn" aria-labelledby="cs-title">
+    <i class="bg" data-bg></i>
+
+    <div class="cs-head" data-reveal>
+      <span class="tag tag--lime">Case study · verified</span>
+      <h2 id="cs-title" class="die die--sm" data-t="Case Study">Case Study</h2>
+      <p class="cs-sub">Delivered on time, on budget — still in production. Interactive landing page →
+      WhatsApp conversion funnel. Every claim below is a delivery fact or visible on the live site —
+      nothing here can be disproven by a 60-second test.</p>
+    </div>
+
+    <div class="cs-grid" data-stagger>
+      <!-- 1 · delivery facts -->
+      <article class="cs-chart cs-chart--wide">
+        <i class="pin"></i>
+        <h3>Delivery vs. client constraints</h3>
+        <p class="cs-hint">The four targets the client set — all kept</p>
+        <div class="cs-facts">
+          <div class="cs-fact"><span class="cs-tick">✓</span><div class="cs-k">On time</div><div class="cs-v">Short timeline met</div><i class="cs-prog"></i></div>
+          <div class="cs-fact"><span class="cs-tick">✓</span><div class="cs-k">Within budget</div><div class="cs-v">Limited budget met</div><i class="cs-prog"></i></div>
+          <div class="cs-fact"><span class="cs-tick">✓</span><div class="cs-k">One clear goal</div><div class="cs-v">Visitor → WhatsApp</div><i class="cs-prog"></i></div>
+          <div class="cs-fact"><span class="cs-tick">✓</span><div class="cs-k">Still live</div><div class="cs-v">In production today</div><i class="cs-prog"></i></div>
         </div>
-        <section>
-          <h3>Prerequisite</h3>
-          <p>Before we get started, there are a few things that need to be prepared.</p>
-          <ul>
-            <li>
-              <h6>GitHub</h6>
-              <p>
-                GitHub is used to connect Vercel with your GitHub repository. 
-                So whenever you change your code, Vercel will automatically deploy your application with the changes you make.
-                You can sign up and create your account <a href="https://github.com/signup" class="text-white">here</a>.
-              </p>
-            </li>
-            <li>
-              <h6>Vercel</h6>
-              <p>Vercel is used to deploy the application and integrated it with your GitHub repository.
-                We also need some configuration on Vercel to make the application run perfectly.
-                You can sign up and create your account <a href="https://vercel.com/signup" class="text-white">here</a>.
-              </p>
-            </li>
-            <li>
-              <h6>PHP</h6>
-              <p>PHP is used in development, especially in local development.
-                You can modify the application and run it locally using PHP.
-                After that, push your changes to GitHub and Vercel will do the rest.
-                You can download PHP <a class="text-white" href="https://www.php.net/downloads.php">here</a>.</p>
-            </li>
-            <li>
-              <h6>Composer</h6>
-              <p>
-                Composer is used to manage dependency for PHP application. 
-                With Composer you can easily manage your external libraries used in PHP application.
-                You can download Composer <a class="text-white" href="https://getcomposer.org/download/">here</a>.</p>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h3>Create Application</h3>
-          <p>To simplify the process, we will use this website. You can create a new GitHub repository using 
-            <a href="https://github.com/putuwaw/php-app-vercel" class="text-white">this template</a>.
-          </p>
-          <p>Create a new repository from template.</p>
-          <img class="img-fluid rounded border mb-4" src="../public/images/github-template.png" alt="GitHub Template">
-          <p>Give the repository name and description, then <kbd>Create repository</kbd>.</p>
-          <img class="img-fluid rounded border mb-4" src="../public/images/create-from-template.png" alt="Create From Template">
-          <p>The PHP application is ready. Next we will configure Vercel for deployment.</p>
-          <img class="img-fluid rounded border mb-4" src="../public/images/success-from-template.png" alt="Success Create From Template">      
-        </section>
-        <section>
-          <h3>Configure Vercel</h3>
-          <p>First, you need to have a Vercel account, then connect your GitHub repository to Vercel.</p>
-          <p>Select <kbd>Add new</kbd> then choose <kbd>Project</kbd>.</p>
-          <img class="img-fluid rounded border mb-4" src="../public/images/new-project-vercel.png" alt="New Project Vercel">          
-          <p>Connect with your previous created repository, then click <kbd>Import</kbd>.</p>
-          <img class="img-fluid rounded border mb-4" src="../public/images/import-git-repo.png" alt="Import GitHub Repository">
-          <p>Give project name and click <kbd>Deploy</kbd>.</p>
-          <img class="img-fluid rounded border mb-4" src="../public/images/configure-project-vercel.png" alt="Configure Project Vercel">
-          <p>Wait a moment and then your app has been deployed, after that choose <kbd>Continue to Dashboard</kbd>.</p>
-          <img class="img-fluid rounded border mb-4" src="../public/images/deploy-app-success.png" alt="Deploy Application Success">
-          <p>Select <kbd>Settings</kbd> in your project dashboard.</p>
-          <img class="img-fluid rounded border mb-4" src="../public/images/dashboard-setting-vercel.png" alt="Dashboard Setting Vercel">          
-          <p>Under your project's <kbd>Settings</kbd>, choose <kbd>Environment Variables</kbd> and then add your Font Awesome kit URL.</p>
-          <img class="img-fluid rounded border mb-4" src="../public/images/env-setting-vercel.png" alt="Environtment Setting Vercel">          
-          <p>A new deployment is required for your changes to take effect, go to <kbd>Deployments</kbd> to redeploy it.</p>
-          <img class="img-fluid rounded border mb-4" src="../public/images/dashboard-deployment-vercel.png" alt="Dashboard Deployment Vercel">
-          <p>Under your project's <kbd>Deployments</kbd>, click the ellipsis (tree dots) and then choose <kbd>Redeploy</kbd>.</p>
-          <img class="img-fluid rounded border mb-4" src="../public/images/redeploy-vercel.png" alt="Redeploy Vercel">
-          <p>Confirm redeploy by clicking <kbd>REDEPLOY</kbd>.</p>
-          <img class="img-fluid rounded border mb-4" src="../public/images/confirm-redeploy.png" alt="Confirm Redeploy Vercel">
-          <p>Wait a moment and then your app has been redeployed, after that click <kbd>Visit</kbd> to view your application.</p>
-          <img class="img-fluid rounded border mb-4" src="../public/images/redeploy-success.png" alt="Redeploy Success">
-          <p>Congratulations, you have successfully deploy your PHP application to Vercel.</p>
-          <img class="img-fluid rounded border mb-4" src="../public/images/visit-result.png" alt="Visit Result">          
-        </section>
-        <section>
-          <h3>Local Development</h3>
-          <p>
-            If you want to start to develop your application locally, you can clone the repository you created before.
-            Remember to change <kbd>your-name</kbd> with your GitHub username and <kbd>repo-name</kbd> with your repository name.
-          </p>          
-          <pre><code>git clone https://github.com/your-name/repo-name.git</code></pre>
-          <p>Install the dependencies.</p>
-          <pre><code>composer install</code></pre>
-          <p>Create a <kbd>.env</kbd> file to store your Font Awesome kit URL.</p>
-          <pre><code>cp .env.example .env</code></pre>
-          <p>Run the app locally.</p>
-          <pre><code>php -S localhost:8000</code></pre>
-          <p>Open in your browser.</p>
-          <pre><code>localhost:8000/api/index.php</code></pre>
-        </section>
-        <section>
-          <h3>Summary</h3>
-          <p>That's all about how to deploy PHP application to Vercel.
-            If you encounter a problem or want to make a contribution just raise an issue or pull request.
-            Highly recommended if you also read the 
-            documentation from <a href="https://vercel.com/docs" class="text-white">Vercel</a> and from <a href="https://github.com/vercel-community/php" class="text-white">Vercel-Community</a>.
-          </p>
-        </section>
-        <section class="pt-4">
-          <footer class="d-flex flex-wrap justify-content-between align-items-center py-2 border-top">
-            <div class="col-md-4 d-flex align-items-center">
-              <span class="text-muted">Created with 
-                <a href="https://getbootstrap.com/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                  <i class="fa-brands fa-bootstrap" aria-label="Bootstrap Icon"></i>
-                  Bootstrap
-                </a>
-              </span>
-            </div>
-            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-              <li class="ms-3">
-                <a class="text-muted" href="/api/index.php">
-                  <i class="fa-solid fa-house"></i>
-                </a>
-              </li>
-            </ul>
-          </footer>
-        </section>
+      </article>
+
+      <!-- 2 · conversion flow -->
+      <article class="cs-chart cs-chart--wide">
+        <i class="pin"></i>
+        <h3>The conversion flow</h3>
+        <p class="cs-hint">One page, one goal — every step verifiable on the live site</p>
+        <div class="cs-flow">
+          <div class="cs-node"><span class="ico">👀</span><div class="t">Visitor</div><div class="d">mobile / search</div></div>
+          <div class="cs-edge"></div>
+          <div class="cs-node"><span class="ico">🌐</span><div class="t">Landing page</div><div class="d">single CTA</div></div>
+          <div class="cs-edge"></div>
+          <div class="cs-node wa"><span class="ico">💬</span><div class="t">One click</div><div class="d">WhatsApp chat</div></div>
+          <div class="cs-edge"></div>
+          <div class="cs-node"><span class="ico">🤖</span><div class="t">Bot replies</div><div class="d">24/7 first response</div></div>
+          <div class="cs-edge"></div>
+          <div class="cs-node win"><span class="ico">🤝</span><div class="t">Owner closes</div><div class="d">sale</div></div>
+        </div>
+        <p class="cs-flow-note">Result reported by the client: <b>more sales, stronger branding — to this day.</b></p>
+      </article>
+
+      <!-- 3 · delivery timeline -->
+      <article class="cs-chart">
+        <i class="pin"></i>
+        <h3>How I led the project</h3>
+        <p class="cs-hint">Discovery → scope → build → ship → close</p>
+        <div class="cs-tl">
+          <div class="cs-spine"></div>
+          <div class="cs-step"><div class="cs-dot">1</div><div class="cs-ph">Discover</div><div class="cs-ttl">Understand the real problem</div>
+            <div class="cs-txt">No direct conversion path · no SEO presence · every inquiry handled manually.</div></div>
+          <div class="cs-step"><div class="cs-dot">2</div><div class="cs-ph">Scope</div><div class="cs-ttl">Cut to one conversion goal</div>
+            <div class="cs-txt">Tight timeline + tight budget → chose proven, fast-delivery stack over enterprise scope.</div></div>
+          <div class="cs-step"><div class="cs-dot">3</div><div class="cs-ph">Build</div><div class="cs-ttl">Landing page · WA bot · SEO</div>
+            <div class="cs-txt">Mobile-first layout, semantic markup, one-click WhatsApp with automated first reply.</div></div>
+          <div class="cs-step done"><div class="cs-dot">4</div><div class="cs-ph">Ship</div><div class="cs-ttl">Hosting + deployment setup</div>
+            <div class="cs-txt">Production hosting, CDN/edge config, environment setup, repeatable deploy workflow.</div></div>
+          <div class="cs-step done"><div class="cs-dot">5</div><div class="cs-ph">Close</div><div class="cs-ttl">On time · within budget</div>
+            <div class="cs-txt">Handover complete — the system is still in production and generating leads today.</div></div>
+        </div>
+      </article>
+
+      <!-- 4 · architecture -->
+      <article class="cs-chart">
+        <i class="pin"></i>
+        <h3>System architecture</h3>
+        <p class="cs-hint">As visible in production headers and source</p>
+        <div class="cs-arch">
+          <div class="cs-box"><span class="ico">📱</span><div class="t">User</div><div class="d">Arrives from search / ads</div></div>
+          <div class="cs-box hl"><span class="ico">☁️</span><div class="t">Cloudflare edge</div><div class="d">DNS · CDN · protection</div></div>
+          <div class="cs-box"><span class="ico">🌐</span><div class="t">Frontend</div><div class="d">Rendered landing page</div></div>
+          <div class="cs-box"><span class="ico">🛠️</span><div class="t">Backend</div><div class="d">Content + media API</div></div>
+          <div class="cs-box wa"><span class="ico">💬</span><div class="t">WhatsApp</div><div class="d">Bot + one-click chat</div></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="sticky-note cs-note" data-reveal>
+      ⚠️ <b>Honesty note:</b> this section shows <b>delivery facts and architecture only</b> — no speed
+      or throughput numbers, because those change with maintenance. The performance audit data
+      (10 Oct 2026) lives in the internal write-up for interview stories, not on the public portfolio.
+      See <a href="markdownfile/PORTFOLIO-TRUE-STORY.md" target="_blank">PORTFOLIO-TRUE-STORY.md</a> for the claim-safety table.
+    </div>
+  </section>
+
+  <!-- ===================== CHAPTER: HOW I WORK (was: Icon Set) ===================== -->
+  <section id="method" class="chapter chapter--dark torn pb-24" aria-labelledby="method-title">
+    <div class="chapter-head" data-reveal>
+      <h2 id="method-title" class="paper-note">How I Work</h2>
+      <p>
+        Whatever the project, the flow is the same: break down the vague problem,
+        find what actually causes it, ship the smallest fix that works, then verify
+        the result.<br>
+        <em>Same flow you'll see in the case study above.</em>
+      </p>
+    </div>
+    <ol class="mc-flow" data-chain>
+      <li class="mc-step"><i class="pin"></i><span class="ico" aria-hidden="true">🔍</span><h3>Break down the problem</h3><p>Turn a vague complaint — “my site is slow” — into a list of measurable causes.</p></li>
+      <li class="mc-step"><i class="pin"></i><span class="ico" aria-hidden="true">🎯</span><h3>Find the root cause</h3><p>Measure first — network, server, code — so we fix what actually matters.</p></li>
+      <li class="mc-step"><i class="pin"></i><span class="ico" aria-hidden="true">🛠️</span><h3>Build &amp; ship</h3><p>The smallest solution that works, deployed through a repeatable pipeline.</p></li>
+      <li class="mc-step"><i class="pin"></i><span class="ico" aria-hidden="true">📈</span><h3>Result</h3><p>Verified after launch, then handed over with docs so it stays fixed.</p></li>
+    </ol>
+  </section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section id="about" class="scene book torn" aria-labelledby="about-title" style="padding-right: 12rem;">
+    <div class="about-grid">
+      <figure class="o polaroid" data-stick>
+        <i class="pin"></i>
+        <div class="art a5"></div>
+        <figcaption class="hand">My Picture</figcaption>
+      </figure>
+      <div class="about-text" data-reveal>
+        <h2 id="about-title" class="greet">
+          <span>Hi, I'm <b>Alif Shidqi Putra Amir</b></span>
+          <span class="you">You can call me</span>
+          <strong class="name">ALIF<br></strong>
+        </h2>
+        <p>I'm a <b>WEB Developer</b> based in Indonesia, focusing on CMS website & Web App. I created a Functional Website that solves real problems, which companies faced</p>
       </div>
     </div>
-  </main>
+
+    <div class="resume" data-stagger>
+      <div class="row">
+        <span class="badge badge--yellow paddingicon" >Experience</span>
+        <div class="sticky-note">
+          <h3>Freelance WEB Developer (2020 – Now)</h3>
+          <h3>certified BNSP as Junior Web Developer (2025)</h3>
+          <h3>School projects (2022 – Now)</h3>
+          <p>Backend Engginer · CMS · Project Manager · Brand Profile WEB</p>
+        </div>
+      </div>
+      <div class="row">
+        <span class="badge badge--red paddingicon">Education</span>
+        <p><b>Paramadina UNIVERSITY (2025 – On going)</b><br>2th-year student<br>Computer Science major</p>
+      </div>
+      <div class="row">
+        <span class="badge badge--blue paddingicon2" >Certification</span>
+        <p><b>“BNSP Junior Web Developer”</b> certified to participate in <b>“the Junior Web Certification Competition” (2025)</b>. Selected for certification by <b>BNSP</b>.</p>
+      </div>
+      <!-- <div class="row">
+        <span class="badge badge--yellow paddingicon">Softwares</span>
+        <ul class="sw" aria-label="Software"><li>Ps</li><li>Ai</li><li>Id</li><li>Lr</li><li>Fg</li></ul>
+      </div> -->
+    </div>
+  </section>
+</main>
+
+<!-- ===================== FOOTER / CONTACT ===================== -->
+<footer id="contact" class="scene foot">
+  <i class="bg" data-bg></i>
+  <div data-stagger class="contents">
+    <div class="o mail">
+      <h2 class="hand">Let's contact!</h2>
+      <p>
+        <b>P/ZALO:</b> +62 812 8491 2036<br>
+        <b>E:</b> <a href="mailto:alifshidqiputraamir@gmail.com">alifshidqiputraamir@gmail.com</a><br>
+        <b>A:</b> Jakarta city, Indonesia
+      </p>
+    </div>
+    <a class="o qr r-l" href="https://www.instagram.com/v4lhalladxd?utm_source=ig_web_button_share_sheet&xtok=ZDNlZDc0MzIxNw==" target="_blank" aria-label="Instagram">
+      <span>
+      </span>
+      @v4lhalladxd
+    </a>
+    <a class="o qr r-r" href="https://github.com/brostopwatchingmonitor" target="_blank" aria-label="GitHub">
+      <testing></testing>
+      @brostopwatchingmonitor
+    </a>
+  </div>
+  <p class="copy">© 2026 Alif Shidqi</p>
+</footer>
 </body>
 </html>
