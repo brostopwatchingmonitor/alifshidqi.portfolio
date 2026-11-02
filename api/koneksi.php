@@ -16,8 +16,9 @@ function db(): PDO {
         throw new RuntimeException('Konfigurasi database belum lengkap');
     }
 
-    $dsn = "pgsql:host={$host};port={$port};dbname={$name};sslmode=require";
-
+    $dsn = "pgsql -h {$host} -p {$port} -d {$name} -U {$user}";
+    //psql -h aws-0-ap-southeast-1.pooler.supabase.com -p 5432 -d postgres -U postgres.weucyxmnjczylbajddmr
+// -p 5432 -d postgres -U postgres.weucyxmnjczylbajddmr
     $pdo = new PDO($dsn, $user, $pass, [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
