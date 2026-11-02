@@ -19,16 +19,6 @@ function env_str(string $key): ?string
     $value = $_ENV[$key] ?? $_SERVER[$key] ?? getenv($key);
     return is_string($value) && $value !== '' ? $value : null;
 }
-
-/**
- * Baca kredensial database dari connection URI (Supabase Session Pooler)
- * atau dari variabel DB_* terpisah sebagai fallback.
- *
- * Contoh DATABASE_URL (session pooler, port 5432):
- * postgresql://postgres.<project-ref>:<password>@<region>.pooler.supabase.com:5432/postgres?sslmode=require
- *
- * @return array{host: string, port: int, name: string, user: string, pass: string, sslmode: string, connect_timeout: int}
- */
 function db_config(): array
 {
     $uri = env_str('DATABASE_URL') ?? env_str('SUPABASE_DB_URL') ?? env_str('POSTGRES_URL');
