@@ -1,9 +1,6 @@
 <?php
 declare(strict_types=1);
 require __DIR__ . '/koneksi.php';
-require __DIR__ . '/../vendor/autoload.php';
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->safeLoad();
 
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: public, s-maxage=300, stale-while-revalidate=60');
