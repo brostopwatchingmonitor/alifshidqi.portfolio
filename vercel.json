@@ -1,20 +1,17 @@
 {
-  "cleanUrls": true,
-  "headers": [
-    {
-      "source": "/styles.css",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600" }]
-    },
-    {
-      "source": "/main.js",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600" }]
-    }
-  ],
   "version": 2,
-  "functions": {
-    "api/*.php": {
-      "runtime": "vercel-php@0.9.0"
-    }
-  }
-
+  "cleanUrls": true,
+  "builds": [
+    { "src": "index.php", "use": "vercel-php@0.9.0" },
+    { "src": "api/*.php", "use": "vercel-php@0.9.0" },
+    { "src": "styles.css", "use": "@vercel/static" },
+    { "src": "main.js", "use": "@vercel/static" },
+    { "src": "performance-graph.html", "use": "@vercel/static" },
+    { "src": "img/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/styles.css", "headers": { "cache-control": "public, max-age=3600" }, "continue": true },
+    { "src": "/main.js", "headers": { "cache-control": "public, max-age=3600" }, "continue": true },
+    { "src": "/", "dest": "/index.php" }
+  ]
 }

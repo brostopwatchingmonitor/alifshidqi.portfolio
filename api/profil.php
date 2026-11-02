@@ -9,7 +9,7 @@ try {
     $pdo = db();
 
     $profil = $pdo->query(
-        'select id, nama, gelar, bio, foto_url, github_url, linkedin_url, email, updated_at
+        'select id, nama, gelar, bio, foto_url, github_url, linkedin_url, ig_url, email, updated_at
          from tbl_data_pribadi order by id limit 1'
     )->fetch();
 

@@ -1,3 +1,66 @@
+<?php
+declare(strict_types=1);
+
+require_once __DIR__ . '/api/koneksi.php';
+
+// Fallback kalau database tidak bisa diakses — halaman tetap tampil.
+$profil = [
+    'email'        => 'alifshidqiputraamir@gmail.com',
+    'github_url'   => 'https://github.com/brostopwatchingmonitor',
+    'linkedin_url' => 'https://linkedin.com/in/alif-amir',
+    'ig_url'       => 'https://www.instagram.com/v4lhalladxd',
+];
+
+try {
+    $row = db()->query(
+        'select email, github_url, linkedin_url, ig_url
+         from tbl_data_pribadi order by id limit 1'
+    )->fetch();
+
+    if ($row) {
+        // Nilai NULL/kosong di DB tidak menimpa fallback.
+        foreach ($row as $key => $value) {
+            if ($value !== null && $value !== '') {
+                $profil[$key] = $value;
+            }
+        }
+    }
+} catch (Throwable $e) {
+    error_log('Gagal memuat profil di index.php: ' . $e->getMessage());
+}
+
+function e(?string $value): string
+{
+    return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+}
+
+/** Pastikan URL punya skema (linkedin_url di DB disimpan tanpa https://). */
+function url_abs(?string $value): string
+{
+    $value = trim((string) $value);
+    if ($value === '') {
+        return '';
+    }
+    return preg_match('~^https?://~i', $value) ? $value : 'https://' . ltrim($value, '/');
+}
+
+/** Ambil handle dari URL: instagram.com/v4lhalladxd?x=1 -> @v4lhalladxd */
+function sosmed_handle(string $url, string $fallback): string
+{
+    $path = parse_url($url, PHP_URL_PATH);
+    $handle = $path ? basename(rtrim($path, '/')) : '';
+    return $handle !== '' ? '@' . $handle : $fallback;
+}
+
+$email    = e($profil['email']);
+$github   = url_abs($profil['github_url']);
+$linkedin = url_abs($profil['linkedin_url']);
+$instagram = url_abs($profil['ig_url']);
+
+$githubLabel    = sosmed_handle($github, '@GitHub');
+$instagramLabel = sosmed_handle($instagram, '@Instagram');
+$linkedinLabel  = preg_replace('~^https?://(www\.)?~i', '', $linkedin);
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -50,7 +113,7 @@
   <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
 
   <!-- App entry point -->
-  <script defer src="main.js"></script>
+  <script defer src="main.js?v=20261102-2"></script>
 </head>
 
 <body>
@@ -269,18 +332,19 @@
       <h2 class="hand">Let's contact!</h2>
       <p>
         <b>P/ZALO:</b> +62 812 8491 2036<br>
-        <b>E:</b> <a href="mailto:alifshidqiputraamir@gmail.com">alifshidqiputraamir@gmail.com</a><br>
+        <b>E:</b> <a href="mailto:<?= $email ?>"><?= $email ?></a><br>
+        <b>in:</b> <a href="<?= e($linkedin) ?>" target="_blank" rel="noopener"><?= e($linkedinLabel) ?></a><br>
         <b>A:</b> Jakarta city, Indonesia
       </p>
     </div>
-    <a class="o qr r-l" href="https://www.instagram.com/v4lhalladxd?utm_source=ig_web_button_share_sheet&xtok=ZDNlZDc0MzIxNw==" target="_blank" aria-label="Instagram">
+    <a class="o qr r-l" href="<?= e($instagram) ?>" target="_blank" rel="noopener" aria-label="Instagram">
       <span>
       </span>
-      @v4lhalladxd
+      <?= e($instagramLabel) ?>
     </a>
-    <a class="o qr r-r" href="https://github.com/brostopwatchingmonitor" target="_blank" aria-label="GitHub">
+    <a class="o qr r-r" href="<?= e($github) ?>" target="_blank" rel="noopener" aria-label="GitHub">
       <testing></testing>
-      @brostopwatchingmonitor
+      <b><?= e($githubLabel) ?></b>
     </a>
   </div>
   <p class="copy">© 2026 Alif Shidqi</p>
