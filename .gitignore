@@ -4,3 +4,4 @@ performance-graph.html
 /markdownfile
 /.superpowers
 .vercel
+.env

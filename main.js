@@ -515,3 +515,28 @@
     }
   }
 })();
+
+async function muatProfil() {
+  try {
+    const res = await fetch('/api/profil.php');
+    if (!res.ok) throw new Error('Gagal memuat profil');
+
+    const { profil, skills } = await res.json();
+
+    document.querySelector('#nama').textContent    = profil.nama;
+    document.querySelector('#gelar').textContent   = profil.gelar ?? '';
+    document.querySelector('#bio').textContent     = profil.bio ?? '';
+
+    const list = document.querySelector('#skills');
+    list.innerHTML = '';
+    for (const s of skills) {
+      const li = document.createElement('li');
+      li.textContent = `${s.nama} (${s.level}/5)`;
+      list.appendChild(li);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+muatProfil();
