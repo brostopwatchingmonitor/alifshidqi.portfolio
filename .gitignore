@@ -5,3 +5,4 @@ performance-graph.html
 /.superpowers
 .vercel
 .env
+/vendor
